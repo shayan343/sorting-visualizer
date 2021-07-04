@@ -24,14 +24,14 @@ const AlgoDetails = (idx) => {
     };
     const ob3 = {
         "title" : "Insertion Sort",
-        "description" : `Merge Sort is an efficient, stable sorting algorith that makes use of the divide and conquer strategy. Conceptually the algorithm works as follows:
-
-        Divide the unsorted list into n sublists, each containing one element(a list of one element is considered sorted)
-        Repeatedly merge sublists to produce new sorted sublists until there is only one sublist remaining. This will be the sorted list.`,
-        "worstCase" : "O(nlogn)",
-        "avgCase" : "O(nlogn)",
-        "bestCase" : "O(nlogn)",
-        "space" : "O(n)"
+        "description": `Insertion Sort is a simple sorting algorithm that iterates through an array and at each iteration it removes one element from the array,
+         finds the location it belongs to in the sorted list and inserts it there, repeating until no elements remain in the unsorted list. It is an in-place, stable
+          sorting algorithm that is inefficient on large input arrays but works well for data sets that are almost sorted. It is more efficient in practice
+           compared to other quadratic sorting algorithms like bubble sort and selection sort.`,
+        "worstCase" : "O(n2)",
+        "avgCase" : "O(n2)",
+        "bestCase" : "O(n)",
+        "space" : "O(1)"
     };
 
     switch (idx) {

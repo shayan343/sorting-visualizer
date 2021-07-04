@@ -192,37 +192,18 @@ const SortingVisualizer = () => {
 
     return (
       <div>
-        {/* <div className="header">
-          <button className="buttonStyle" onClick={() => resetArray()}>
-            Randomize
-          </button>
-          <button className="buttonStyle" onClick={() => infoSwitch(1)}>
-            Bubble Sort
-          </button>
-
-          <button className="buttonStyle" onClick={() => infoSwitch(2)}>
-            Merge Sort
-          </button>
-          <button className="buttonStyle" onClick={() => infoSwitch(3)}>
-            Insertion Sort
-          </button>
-          <button className="buttonStyle" disabled={disable} onClick={() => algoSwitch(algo)}>
-            Visualize
-          </button>
-        </div> */}
-        
-
+       
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Brand href="#home">Sorting Visualizer</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#features" onClick={()=>resetArray()}>Randomize</Nav.Link>
-      <Nav.Link href="#pricing" onClick={()=>algoSwitch(algo)}>Visualize</Nav.Link>
+      <Nav.Link onClick={()=>resetArray()}>Randomize</Nav.Link>
+      <Nav.Link onClick={()=>algoSwitch(algo)}>Visualize</Nav.Link>
       <NavDropdown title={title} id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1" onClick={()=>infoSwitch(1)}>Bubble Sort</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2" onClick={()=>infoSwitch(2)}>Merge Sort</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3" onClick={()=>infoSwitch(3)}>Insertion Sort</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>infoSwitch(1)}>Bubble Sort</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>infoSwitch(2)}>Merge Sort</NavDropdown.Item>
+        <NavDropdown.Item onClick={()=>infoSwitch(3)}>Insertion Sort</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   </Navbar.Collapse>
