@@ -26,6 +26,7 @@ const SortingVisualizer = () => {
   const [sortInfo, setSortInfo] = useState([{}]);
   const [algo, setAlgo] = useState();
   const [array, setArray] = useState([]);
+  const [title, setTitle] = useState("Select Algorithm");
   //const [disable, setDisable] = useState(false);
 
 
@@ -174,12 +175,15 @@ const SortingVisualizer = () => {
   function infoSwitch(algo) {
     switch (algo) {
       case 1: setAlgo(1);
+        setTitle("Bubble Sort");
         setSortInfo([AlgoDetails(1)]); break;
       
-      case 2: setAlgo(2); 
+      case 2: setAlgo(2);
+        setTitle("Merge Sort");
         setSortInfo([AlgoDetails(2)]); break;
       
-        case 3: setAlgo(3);
+      case 3: setAlgo(3);
+        setTitle("Insertion Sort");
         setSortInfo([AlgoDetails(3)]); break;
       default: break;
     }
@@ -207,19 +211,22 @@ const SortingVisualizer = () => {
           </button>
         </div> */}
         
-  <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="#home">Sorting Visualizer</Navbar.Brand>
-    <Nav className="ml-auto">
-      <Nav.Link href="#home" onClick={()=>resetArray()}>Randomize</Nav.Link>
-      <Nav.Link href="#features" onClick={()=>algoSwitch(algo)}>Visualize</Nav.Link>
-      <NavDropdown title="Select Algorithm" id="collasible-nav-dropdown">
+
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Navbar.Brand href="#home">Sorting Visualizer</Navbar.Brand>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="#features" onClick={()=>resetArray()}>Randomize</Nav.Link>
+      <Nav.Link href="#pricing" onClick={()=>algoSwitch(algo)}>Visualize</Nav.Link>
+      <NavDropdown title={title} id="collasible-nav-dropdown">
         <NavDropdown.Item href="#action/3.1" onClick={()=>infoSwitch(1)}>Bubble Sort</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2" onClick={()=>infoSwitch(2)}>Merge Sort</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3" onClick={()=>infoSwitch(3)}>Insertion Sort</NavDropdown.Item>
       </NavDropdown>
     </Nav>
-    
-  </Navbar>
+  </Navbar.Collapse>
+</Navbar>
  
           
       
