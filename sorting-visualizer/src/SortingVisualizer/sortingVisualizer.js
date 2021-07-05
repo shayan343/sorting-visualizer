@@ -1,14 +1,16 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-loop-func */
 import React, { useEffect, useState } from "react";
 import "./sortingVisualizer.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, NavDropdown, Nav } from 'react-bootstrap';
 import getBubbleSortAnimations from "../SortingAlgorithms/bubbleSort";
-import { getMergeSortAnimations } from "../SortingAlgorithms/mergeSort";
+import getMergeSortAnimations from "../SortingAlgorithms/mergeSort";
 import getInsertionSortAnimations from "../SortingAlgorithms/insertionSort";
 import randomIntFromInterval from "./utility";
 import SortInfo from "./SortInfo/SortInfo";
 import AlgoDetails from "./SortInfo/AlgoDetails";
+
 
 
 const ANIMATION_SPEED_MS = 15;
@@ -20,6 +22,8 @@ const PRIMARY_COLOR = "#fff";
 const SECONDARY_COLOR = "#f69";
 
 
+var arr = [];
+
 
 const SortingVisualizer = () => {
   
@@ -27,7 +31,7 @@ const SortingVisualizer = () => {
   const [algo, setAlgo] = useState();
   const [array, setArray] = useState([]);
   const [title, setTitle] = useState("Select Algorithm");
-  //const [disable, setDisable] = useState(false);
+
 
 
 
@@ -37,13 +41,26 @@ const SortingVisualizer = () => {
   
   
 
-  function resetArray() {
+  function resetArray() {   
     const array = [];
     for (let i = 0; i < NUMBER_OF_ARRAY_BARS; i++) {
       array.push(randomIntFromInterval(50, 600));
     }
-
     setArray(array);
+  }
+
+
+  function recolorArray() {
+    arr.map((a) => {
+      console.log(a)
+      clearInterval(a);
+      arr = [];
+    });  
+    const arrayBars = document.getElementsByClassName("array-bar");
+    for (var i = 0; i < NUMBER_OF_ARRAY_BARS; i++){
+      const barStyle = arrayBars[i].style;
+      barStyle.backgroundColor = PRIMARY_COLOR;
+    }
   }
    
   
@@ -57,16 +74,16 @@ const SortingVisualizer = () => {
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
         const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
+        arr.push(setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS));
       } else {
-        setTimeout(() => {
+        arr.push(setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           barOneStyle.height = `${newHeight/10}vh`;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS));
       }
     }
   }
@@ -82,18 +99,18 @@ const SortingVisualizer = () => {
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
         const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
-        setTimeout(() => {
+        arr.push(setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS));
       } else {
-        setTimeout(() => {
+        arr.push(setTimeout(() => {
           const [barOneIdx, barTwoIdx, newHeight1, newHeight2] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           const barTwoStyle = arrayBars[barTwoIdx].style;
           barOneStyle.height = `${newHeight1 / 10}vh`;
           barTwoStyle.height = `${newHeight2 / 10}vh`;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS));
       }
     }
     
@@ -107,12 +124,12 @@ const SortingVisualizer = () => {
       if ((animations[i]).length === 2) {
         const [barIdx, flag] = animations[i];
         if (flag === -10) {
-          setTimeout(() => {
+          arr.push(setTimeout(() => {
               
             if (globalLast !== -1) {
-              setTimeout(() => {
+              arr.push(setTimeout(() => {
                 arrayBars[globalLast].style.backgroundColor = PRIMARY_COLOR;
-              }, i * ANIMATION_SPEED_MS);
+              }, i * ANIMATION_SPEED_MS));
               // if(last !== -1) {
               //   setTimeout(() => {
               //   arrayBars[last].style.backgroundColor = PRIMARY_COLOR;
@@ -121,20 +138,20 @@ const SortingVisualizer = () => {
               // }
               arrayBars[barIdx].style.backgroundColor = "grey";
             }
-          }, i * ANIMATION_SPEED_MS);
+          }, i * ANIMATION_SPEED_MS));
           globalLast = barIdx;
         }
         else {
           console.log(last);
           if (last !== -1) {
             console.log("A" + last);
-            setTimeout(() => {
+            arr.push(setTimeout(() => {
               arrayBars[last].style.backgroundColor = PRIMARY_COLOR;
-            }, i * ANIMATION_SPEED_MS);
+            }, i * ANIMATION_SPEED_MS));
           }
-          setTimeout(() => {
+          arr.push(setTimeout(() => {
             arrayBars[barIdx].style.backgroundColor = SECONDARY_COLOR;
-          }, i * ANIMATION_SPEED_MS);
+          }, i * ANIMATION_SPEED_MS));
           last = barIdx;
           // console.log(last);
         }
@@ -144,13 +161,13 @@ const SortingVisualizer = () => {
         const barOneStyle = arrayBars[barOneIdx].style;
         const barTwoStyle = arrayBars[barTwoIdx].style;
         const color = PRIMARY_COLOR;
-        setTimeout(() => {
+        arr.push(setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS));
       } else {
         // console.log((animations[i]).length());
-        setTimeout(() => {
+        arr.push(setTimeout(() => {
           const [barOneIdx, barTwoIdx, newHeight1, newHeight2] = animations[i];
           const barOneStyle = arrayBars[barOneIdx].style;
           const barTwoStyle = arrayBars[barTwoIdx].style;
@@ -158,13 +175,19 @@ const SortingVisualizer = () => {
           barTwoStyle.height = `${newHeight2 / 10}vh`;
           barOneStyle.backgroundColor = PRIMARY_COLOR;
           barTwoStyle.backgroundColor = PRIMARY_COLOR;
-        }, i * ANIMATION_SPEED_MS);
+        }, i * ANIMATION_SPEED_MS));
       }
     }
   }
 
 
   function algoSwitch(algo) {
+
+    // eslint-disable-next-line array-callback-return
+    recolorArray();
+    resetArray();
+
+
     switch(algo) {
       case 1: bubbleSort(); break;
       case 2: mergeSort(); break;
@@ -173,12 +196,14 @@ const SortingVisualizer = () => {
     }
   }
   function infoSwitch(algo) {
+    recolorArray();
+    resetArray();
     switch (algo) {
-      case 1: setAlgo(1);
+      case 1: setAlgo(1); 
         setTitle("Bubble Sort");
         setSortInfo([AlgoDetails(1)]); break;
       
-      case 2: setAlgo(2);
+      case 2: setAlgo(2); 
         setTitle("Merge Sort");
         setSortInfo([AlgoDetails(2)]); break;
       
@@ -187,6 +212,11 @@ const SortingVisualizer = () => {
         setSortInfo([AlgoDetails(3)]); break;
       default: break;
     }
+  }
+
+  function handleRandomize() {
+    recolorArray();
+    resetArray();
   }
     
 
@@ -198,7 +228,7 @@ const SortingVisualizer = () => {
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link onClick={()=>resetArray()}>Randomize</Nav.Link>
+      <Nav.Link onClick={()=>handleRandomize()}>Randomize</Nav.Link>
       <Nav.Link onClick={()=>algoSwitch(algo)}>Visualize</Nav.Link>
       <NavDropdown title={title} id="collasible-nav-dropdown">
         <NavDropdown.Item onClick={()=>infoSwitch(1)}>Bubble Sort</NavDropdown.Item>

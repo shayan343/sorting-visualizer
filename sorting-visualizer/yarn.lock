@@ -10950,6 +10950,11 @@
   "resolved" "https://registry.yarnpkg.com/thunky/-/thunky-1.1.0.tgz"
   "version" "1.1.0"
 
+"time-events-manager@^0.1.1":
+  "integrity" "sha1-2osxZIzgRDKBLxfrsK4BjnGu5gE="
+  "resolved" "https://registry.npmjs.org/time-events-manager/-/time-events-manager-0.1.1.tgz"
+  "version" "0.1.1"
+
 "timers-browserify@^2.0.4":
   "integrity" "sha512-9phl76Cqm6FhSX9Xe1ZUAMLtm1BLkKj2Qd5ApyWkXzsMRaA7dgr81kf4wJmQf/hAvg8EEyJxDo3du/0KlhPiKQ=="
   "resolved" "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.12.tgz"
